@@ -1,9 +1,4 @@
-momin
-104
-20
-momin
-104
-20
-burhan
-105
-23
+umar,101,10
+sahil,102,11
+mehwish,103,11
+noman,105,20
