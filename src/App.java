@@ -12,7 +12,7 @@ public class App {
         System.out.println("Press 1 to add student");
         System.out.println("Press 2 to view all students");
         System.out.println("Press 3 to search students");
-        System.out.println("Press 4 to search students");
+        System.out.println("Press 4 to delete students");
         int choice=sc.nextInt();
         StudentManager sm =new StudentManager();
         
@@ -21,9 +21,9 @@ public class App {
                 System.out.println("enter name of student");
                 String name=sc.next();
                 System.out.println("enter id of student");
-                int id=sc.nextInt();
+                String id=sc.next();
                 System.out.println("enter age of student");
-                int age=sc.nextInt();
+                String age=sc.next();
                 Student student=new Student(id,name,age);
                
                 sm.saveStudent(student);
@@ -45,23 +45,23 @@ public class App {
     }
 }
 class Student{
-    private int id;
+    private String id;
     private String name;
-    private int age;
+    private String age;
 
-    public Student(int id,String name,int age){
+    public Student(String id,String name,String age){
         this.id=id;
         this.name=name;
         this.age=age;
     }
 
-    public int get_id(){
+    public String get_id(){
         return this.id;
     }
     public String get_name(){
         return this.name;
     }
-    public int get_age(){
+    public String get_age(){
         return this.age;
     }
 }
@@ -87,7 +87,7 @@ class StudentManager{
         try(BufferedReader reader=new BufferedReader(new FileReader(File_name))){
             String line;
             while((line=reader.readLine())!=null){
-                String[] parts=line.split(",");
+               String[] parts=line.split(",");
                 System.out.println(parts[0]);
             
             }
@@ -128,36 +128,37 @@ class StudentManager{
     Scanner sc=new Scanner(System.in);
     System.out.println("Enter id of the student");
     String id=sc.next();
-
+    boolean found=false;
     try(BufferedReader reader=new BufferedReader(new FileReader(File_name))){
         String line;
         while((line=reader.readLine())!=null){
             String[] parts=line.split(",");
-            System.out.println(line);
-            if (id.equals(parts[1])){
+            
+            if (!id.equals(parts[1])){
                 
+                found=true;
+
                 try( BufferedWriter writer=new BufferedWriter(new FileWriter(File_name,true))){
-                    writer.write("",0,0);
+                    writer.write(parts[0]+","+parts[1]+","+parts[2]+" \n");
                     
                      System.out.println("Saved successfully");
                  }
                  catch(IOException e){
                      System.out.println("Save failed");
                  }
-               
+
+
             }
             
         }
-        
+   
+    
 
-   }
-   catch(IOException e){
-    System.out.println("problem reading");
+    }
+    catch(IOException e){
+        System.out.println("problem reading");
 }
-
-
- }
 }
-
+}
 
 
